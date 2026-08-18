@@ -106,3 +106,8 @@ header p{
 .task-list li:last-child{
     border-bottom: 0;
 }
+
+.completed{
+    text-decoration: line-through;
+    opacity: 0.5;
+}
