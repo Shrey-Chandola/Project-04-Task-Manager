@@ -76,7 +76,7 @@ header p{
     color:cyan;
 }
 
-.task-list{
+.Task-list{
     background-color: salmon;
     border: 2px solid gray;
     border-radius: 10px;
@@ -85,25 +85,25 @@ header p{
     margin-bottom: 16px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
-.task-list h2{
+.Task-list h2{
     color:seashell;
     font-weight: bold; 
     margin: 0;
 }
-.task-list ul{
+.Task-list ul{
     list-style-type: none;
     padding: 0;
     margin:0;
     width: 100%;
 }
-.task-list li{
+.Task-list li{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
 }
-.task-list li:last-child{
+.Task-list li:last-child{
     border-bottom: 0;
 }
 
