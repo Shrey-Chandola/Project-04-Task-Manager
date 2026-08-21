@@ -118,5 +118,5 @@ header p{
 }
 .task-filters button.active-filter:hover{
     background-color: black;
-    color: white;
+    color: yellow;
 }
