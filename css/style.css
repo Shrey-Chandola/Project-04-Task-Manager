@@ -111,3 +111,12 @@ header p{
     text-decoration: line-through;
     opacity: 0.5;
 }
+
+.task-filters button.active-filter{
+    background-color: black;
+    color:white;
+}
+.task-filters button.active-filter:hover{
+    background-color: black;
+    color: white;
+}

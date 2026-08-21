@@ -8,7 +8,7 @@ const completedButton = document.getElementById("completed-btn");
 let currentFilter = "all";
 
 const clearCompletedButton = document.getElementById("clear-completed-btn");
-const taskCount = document.getElementById("task-count");
+const taskCount = document.getElementById("task-Count");
 
 let tasks = [];    // Making array to store tasks at a place that user types in form
 console.log(inputTask); // only for styding purpose/ debugging
