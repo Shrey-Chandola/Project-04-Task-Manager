@@ -63,7 +63,7 @@ function renderTasks(){  // Func. to show rendering
     completeBtn.textContent = "Complete";
     completeBtn.addEventListener("click",function(){  //After clicking on complete button completed class is assigned to it,THUS so that its styling/work can be done.  
         task.completed = !task.completed;  // To change isCompleted/NotCompleted when we tap on complete button
-        li.classList.toggle("completed",task.completed); // toggle -> if class exits then removes it & vice-versa   
+        li.classList.toggle("completed",task.completed); // toggle -> if class exists then removes it & vice-versa   
         renderTasks();     // To change the data accordingly that fits under complete filter  
     });                                  
     
@@ -145,17 +145,28 @@ addButton.addEventListener("click",function(event){
 
 });
 
+function updateActiveFilter(button)
+{   allButton.classList.remove("active-filter");
+    activeButton.classList.remove("active-filter");
+    completedButton.classList.remove("active-filter");
+    button.classList.add("active-filter");
+}
+
+
 // TASK FILTERS IMPLEMENTATION : 
 allButton.addEventListener("click", function(){
     currentFilter = "all";
+    updateActiveFilter(allButton);
     renderTasks();  
 });
 activeButton.addEventListener("click", function(){
     currentFilter = "active";
+    updateActiveFilter(activeButton);
     renderTasks();
 });
 completedButton.addEventListener("click", function(){
     currentFilter = "completed";
+    updateActiveFilter(completedButton);
     renderTasks();
 });
 
