@@ -84,6 +84,7 @@ header p{
     margin-top: 16px;
     margin-bottom: 16px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    counter-reset: task-counter;   /* counter-reset creates a CSS counter starting from zero */
 }
 .Task-list h2{
     color:seashell;
@@ -97,17 +98,42 @@ header p{
     width: 100%;
 }
 .Task-list li{
-    display: flex;
-    justify-content: space-between;
+    display: grid;   /* Used grid instead of flex to control the spacing between tick, dustbin & task text */
+    grid-template-columns: auto minmax(0,1fr) auto auto ;
+    /* 4 col.s are formed auto-> number, minmax(0,1fr)->task text, auto->complete-btn, auto->dele-btn */ 
     align-items: center;
+    gap: 16px;
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
+    counter-increment: task-counter;  /* Every task list(<li>) increases the counter */
 }
-.Task-list li:last-child{
+
+.Task-list li::before{   /* Used to show those no.s infront of each task */
+    content: counter(task-counter);
+    display: grid;  /* Used to center the no. inside its block to form a circle, and make it easier to read */ 
+    place-items: center;  /* This is shorthand for justify-content: center; align-items:cente r*/
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #2f4542;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.Task-list li:last-child{  /* Used to delete that extra white line coming after the last task */
     border-bottom: 0;
 }
 
-.completed{
+.Task-list li span{
+    font-size: 1rem;
+    font-weight: 550;
+    color: #2f3542;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.Task-list li.completed span{
     text-decoration: line-through;
     opacity: 0.5;
 }
@@ -119,4 +145,47 @@ header p{
 .task-filters button.active-filter:hover{
     background-color: black;
     color: yellow;
+}
+
+.complete-btn, .delete-btn, #clear-completed-btn{
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: bacground-color 0.2s ease, transform 0.2 ease;
+}
+.complete-btn{
+    background-color: #4caf50;
+    color: white;
+}
+.delete-btn{
+    background-color: #e53935;
+    color: white;
+}
+#clear-completed-btn{
+    background-color: #374151;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.complete-btn:hover{
+    background-color: #388e3c;
+    transform: translateY(-2px);
+}
+.delete-btn:hover{
+    background-color: #c62828;
+    transform: translateY(-2px);
+}
+#clear-completed-btn:hover{
+    background-color: #1f2933;
+    transform: translateY(-2px);
+}
+
+#task-Count{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #374151;
 }
