@@ -54,20 +54,29 @@ function renderTasks(){  // Func. to show rendering
         const span = document.createElement("span");
         const completeBtn = document.createElement("button");  // To make a complete Button to add in completed filter/to indicate that task is done 
         const deleteBtn = document.createElement("button"); 
-    
+        
+        completeBtn.classList.add("complete-btn");  // Making clasess for applying css on them
+        deleteBtn.classList.add("delete-btn");
+
         // li.textContent= inputTask.value;
 // Used span rather than original direct li.textCon.. 
 //    span.textContent = inputTask.value;  // as here through span we can add emoji's type things too
     span.textContent = task.text;  // Now we are rendering task
 
-    completeBtn.textContent = "Complete";
+    // completeBtn.textContent = "Complete";
+    completeBtn.innerHTML = '<i class="fa-solid fa-check"></i>'; // This was correct, but it was plain text only but we wanted with icons too
+    completeBtn.setAttribute("aria-label", "Mark Task as Complete");  // Thus used this 
+
     completeBtn.addEventListener("click",function(){  //After clicking on complete button completed class is assigned to it,THUS so that its styling/work can be done.  
         task.completed = !task.completed;  // To change isCompleted/NotCompleted when we tap on complete button
         li.classList.toggle("completed",task.completed); // toggle -> if class exists then removes it & vice-versa   
         renderTasks();     // To change the data accordingly that fits under complete filter  
     });                                  
     
-    deleteBtn.textContent = "Delete";  
+    // deleteBtn.textContent = "Delete";  
+    deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';  
+    deleteBtn.setAttribute("aria-label", "Delete Task");
+
     // deleteBtn.addEventListener("click",function(){
     //     li.remove();   //It del/removes the child(here li) 
     // });
@@ -156,8 +165,8 @@ function updateActiveFilter(button)
 // TASK FILTERS IMPLEMENTATION : 
 allButton.addEventListener("click", function(){
     currentFilter = "all";
-    updateActiveFilter(allButton);
-    renderTasks();  
+    updateActiveFilter(allButton);   // This is used to determine to js/code that this btn is currently selected/opted
+    renderTasks();  // To rewrite/align tasks according to task filter    
 });
 activeButton.addEventListener("click", function(){
     currentFilter = "active";
