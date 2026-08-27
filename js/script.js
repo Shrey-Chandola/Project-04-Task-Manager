@@ -15,7 +15,23 @@ console.log(inputTask); // only for styding purpose/ debugging
 console.log(taskList);
 console.log(addButton);
 
+// IMPLEMENTING LOCAL STORAGE FEATURE
+function saveTasks(){   // To save all the tasks in localStorage
+    // SYNTAX:     localStorage.setItem(key, value);
+// We took our tasks as the key and their info as their value
+// E.g: DSA(task/key): id,text,completed(values of DSA)
 
+// PROBLEM : In localStorage stores data as strings,
+//  THUS changed our js tasks array(here, value) to string by JSON.stringfy(tasks), here tasks will fetch it's value 
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+function loadTasks(){  // To load all saved Tasks in page after refreshing
+    const savedTasks = localStorage.getItem("tasks");  // Saving/Storing the saved tasks in a var.
+    if(savedTasks){ // if savedTasks(the saved task is not empty, means have some value for it)
+        tasks = JSON.parse(savedTasks);  // rewrite/add that task to tasks(array)
+        // JSON.parse converts the stored JSON string back into usable js data(its original form)
+    }
+}
 
 // MAIN WORKING OF TASK FILTER LOGIC, DISPLAYING THEM(TASKS) ON PAGE
 function renderTasks(){  // Func. to show rendering
@@ -70,6 +86,7 @@ function renderTasks(){  // Func. to show rendering
     completeBtn.addEventListener("click",function(){  //After clicking on complete button completed class is assigned to it,THUS so that its styling/work can be done.  
         task.completed = !task.completed;  // To change isCompleted/NotCompleted when we tap on complete button
         li.classList.toggle("completed",task.completed); // toggle -> if class exists then removes it & vice-versa   
+        saveTasks();   // To save the changed data/tasks in local storage
         renderTasks();     // To change the data accordingly that fits under complete filter  
     });                                  
     
@@ -84,6 +101,7 @@ function renderTasks(){  // Func. to show rendering
         tasks = tasks.filter(function(item){
             return item.id!==task.id;  // To find the exact task that we marked as delete to not include in task array
         });
+        saveTasks();
         renderTasks();   // To rebuild the task array again with now new data(after deleted ele)
     });
 
@@ -116,6 +134,8 @@ addButton.addEventListener("click",function(event){
     };
 
     tasks.push(task);   // Adding Task(user filled by form) through task object(above) in task array
+
+    saveTasks();       // To save the tasks in local storage, thus they won't vanish on page refreshing
 
     console.log("Button Clicked.");  // For debugging
     console.log(inputTask.value);
@@ -184,8 +204,12 @@ clearCompletedButton.addEventListener("click", function(){
     tasks = tasks.filter(function(task){   // To delete/remove all completed tasks at once       
         return task.completed === false;
     });
+    saveTasks();
     renderTasks();  // To make new task list with new tasks array made above
 });
 
+// LOCAL STORAGE IMPLEMENTATION PART :
+loadTasks();   // Did it here, as after all the tasks are saved properly for each task changing events/filters
+renderTasks();  // To render all the new Loaded Tasks in tasks(array) to screen/page
 
 console.log("print hello");  // debugging
