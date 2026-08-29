@@ -6,6 +6,7 @@ const allButton = document.getElementById("all-btn");
 const activeButton = document.getElementById("active-btn");
 const completedButton = document.getElementById("completed-btn");
 let currentFilter = "all";
+const emptyMessage = document.createElement("p");
 
 const clearCompletedButton = document.getElementById("clear-completed-btn");
 const taskCount = document.getElementById("task-Count");
@@ -64,12 +65,19 @@ function renderTasks(){  // Func. to show rendering
         });
     }
     console.log("filtered tasks: ",filteredTasks);  // debugging
+    
     if(currentFilter==="all" && filteredTasks.length===0){   // To show all tasks
-        const emptyMessage = document.createElement("p");
         emptyMessage.textContent = "No Tasks Added Yet.";
         taskList.appendChild(emptyMessage);
     }
-
+    else if(currentFilter==="active" && filteredTasks.length===0){
+        emptyMessage.textContent = "No Active Tasks Added  Yet.";
+        taskList.appendChild(emptyMessage);
+    }
+    else if(currentFilter==="completed" && filteredTasks.length===0){
+        emptyMessage.textContent = "No Tasks Completed Yet.";
+        taskList.appendChild(emptyMessage);
+    }
 
     filteredTasks.forEach(function(task){  // Run this code once for every ele in tasks array(i.e. our whole inupt tasks)
         const li = document.createElement("li");  // To make list tag(object in js) dynamically to work on it 
@@ -182,6 +190,8 @@ addButton.addEventListener("click",function(event){
     renderTasks();
 
 });
+
+
 
 function updateActiveFilter(button)
 {   allButton.classList.remove("active-filter");
